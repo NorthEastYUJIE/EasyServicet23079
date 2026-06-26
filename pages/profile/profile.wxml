@@ -1,0 +1,40 @@
+<!-- pages/profile/profile.wxml -->
+<view class="container">
+  <view class="profile-card">
+    <view class="user-info" wx:if="{{isLogin}}">
+      <view class="avatar-default" wx:if="{{!userInfo.avatar}}">
+        <text>👤</text>
+      </view>
+      <image wx:else class="avatar" src="{{userInfo.avatar}}" mode="aspectFill"/>
+      <view class="user-meta">
+        <text class="nickname">{{userInfo.nickname || '用户'}}</text>
+        <text class="username">账号：{{userInfo.username}}</text>
+      </view>
+      <text class="edit-btn" bindtap="goEdit">编辑</text>
+    </view>
+    
+    <view class="user-info" wx:else bindtap="goLogin">
+      <view class="avatar-default">
+        <text>?</text>
+      </view>
+      <view class="user-meta">
+        <text class="nickname">点击登录</text>
+        <text class="username">登录后享受更多服务</text>
+      </view>
+      <text class="edit-btn">›</text>
+    </view>
+  </view>
+
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goMyAppointment">
+      <text class="menu-text">📋 我的预约</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goEdit" wx:if="{{isLogin}}">
+      <text class="menu-text">✏️ 修改资料</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <button class="logout-btn" bindtap="logout" wx:if="{{isLogin}}">退出登录</button>
+</view>
