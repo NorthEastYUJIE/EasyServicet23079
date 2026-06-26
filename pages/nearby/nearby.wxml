@@ -1,0 +1,44 @@
+<!-- pages/nearby/nearby.wxml -->
+<view class="container">
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="radius-box">
+      <text class="filter-label">半径：</text>
+      <input
+        class="radius-input"
+        type="digit"
+        placeholder="不限"
+        value="{{radius}}"
+        bindinput="onRadiusInput"
+        bindconfirm="onRadiusConfirm"
+      />
+      <text class="unit">km</text>
+      <view class="confirm-btn" bindtap="onRadiusConfirm">确定</view>
+    </view>
+    <view class="sort-btn" bindtap="toggleSort">
+      <text>距离 {{sortOrder === 'asc' ? '近→远' : '远→近'}}</text>
+      <text class="sort-arrow">⇅</text>
+    </view>
+  </view>
+
+  <!-- 服务列表 -->
+  <view class="service-list">
+    <view class="service-item" wx:for="{{services}}" wx:key="id" bindtap="onServiceTap" data-id="{{item.id}}">
+      <image class="service-cover" src="{{item.coverUrl}}" mode="aspectFill"/>
+      <view class="service-info">
+        <text class="service-name">{{item.serviceName}}</text>
+        <text class="service-price">¥{{item.price}}/{{item.unit}}</text>
+        <text class="service-address">{{item.city}} {{item.district}} | {{item.address}}</text>
+        <text class="service-provider">{{item.provider}}</text>
+        <text class="service-distance" wx:if="{{item.distance}}">距离 {{item.distance}}km</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-tip" wx:if="{{loading}}">加载中...</view>
+  <view class="loading-tip" wx:if="{{finished && services.length > 0}}">没有更多了</view>
+  <view class="empty-tip" wx:if="{{!loading && services.length === 0}}">
+    <text>附近暂无服务</text>
+  </view>
+</view>
