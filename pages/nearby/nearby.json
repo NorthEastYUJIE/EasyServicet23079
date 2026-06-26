@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "附近服务",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}
