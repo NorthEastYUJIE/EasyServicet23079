@@ -1,0 +1,56 @@
+<!-- pages/appointment-detail/appointment-detail.wxml -->
+<view class="container" wx:if="{{detail}}">
+  <view class="status-bar" style="background: {{getStatusStyle(detail.status).color}}20;">
+    <text style="color: {{getStatusStyle(detail.status).color}};">{{getStatusStyle(detail.status).text}}</text>
+  </view>
+
+  <view class="detail-card">
+    <view class="detail-section">
+      <text class="section-title">服务信息</text>
+      <view class="info-row">
+        <text class="info-label">服务名称</text>
+        <text class="info-value">{{detail.serviceName}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">预约时间</text>
+        <text class="info-value">{{detail.orderTime}} {{detail.timeSlot}}</text>
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <text class="section-title">联系人信息</text>
+      <view class="info-row">
+        <text class="info-label">姓名</text>
+        <text class="info-value">{{detail.username}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">电话</text>
+        <text class="info-value">{{detail.phone}}</text>
+      </view>
+      <view class="info-row" wx:if="{{detail.remark}}">
+        <text class="info-label">备注</text>
+        <text class="info-value">{{detail.remark}}</text>
+      </view>
+    </view>
+
+    <view class="detail-section">
+      <text class="section-title">订单信息</text>
+      <view class="info-row">
+        <text class="info-label">订单编号</text>
+        <text class="info-value">#{{detail.id}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-label">创建时间</text>
+        <text class="info-value">{{detail.createTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-area" wx:if="{{detail.status == 0}}">
+    <button class="action-btn cancel" bindtap="cancelOrder">取消预约</button>
+  </view>
+  <view class="action-area" wx:if="{{detail.status == 3}}">
+    <button class="action-btn primary" bindtap="reBook">重新预约</button>
+  </view>
+</view>
