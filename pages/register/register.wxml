@@ -1,0 +1,43 @@
+<!-- pages/register/register.wxml -->
+<view class="register-container">
+  <view class="form-title">新用户注册</view>
+  
+  <view class="form-card">
+    <view class="form-item">
+      <text class="form-label">用户名</text>
+      <input placeholder="3-20位字母数字" value="{{username}}" bindinput="onInput" data-field="username"/>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">手机号</text>
+      <input type="number" placeholder="11位手机号" maxlength="11" value="{{phone}}" bindinput="onInput" data-field="phone"/>
+    </view>
+    
+    <view class="form-item code-item">
+      <text class="form-label">验证码</text>
+      <input type="number" placeholder="短信验证码" value="{{code}}" bindinput="onInput" data-field="code"/>
+      <button class="code-btn" bindtap="sendCode" disabled="{{countdown > 0}}">
+        {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+      </button>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">密码</text>
+      <input type="password" placeholder="至少6位" value="{{password}}" bindinput="onInput" data-field="password"/>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">确认密码</text>
+      <input type="password" placeholder="再次输入密码" value="{{confirmPwd}}" bindinput="onInput" data-field="confirmPwd"/>
+    </view>
+    
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <input placeholder="怎么称呼你" value="{{nickname}}" bindinput="onInput" data-field="nickname"/>
+    </view>
+    
+    <button class="submit-btn" bindtap="doRegister">立即注册</button>
+    
+    <view class="login-link" bindtap="goLogin">已有账号？去登录</view>
+  </view>
+</view>
