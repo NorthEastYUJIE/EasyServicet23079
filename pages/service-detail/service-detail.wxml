@@ -1,0 +1,42 @@
+<!-- pages/service-detail/service-detail.wxml -->
+<view class="container" wx:if="{{service}}">
+  <swiper class="detail-banner" indicator-dots autoplay circular wx:if="{{service.bannerUrls && service.bannerUrls.length > 0}}">
+    <swiper-item wx:for="{{service.bannerUrls}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill"/>
+    </swiper-item>
+  </swiper>
+  <image wx:else class="detail-cover" src="{{service.coverUrl}}" mode="aspectFill"/>
+
+  <view class="detail-card">
+    <view class="detail-header">
+      <text class="detail-name">{{service.serviceName}}</text>
+      <view class="detail-price">
+        <text class="price-num">¥{{service.price}}</text>
+        <text class="price-unit">/{{service.unit}}</text>
+      </view>
+    </view>
+    <view class="detail-meta">
+      <text class="meta-item">服务区域：{{service.city}} {{service.district}}</text>
+      <text class="meta-item">服务商：{{service.provider}}</text>
+      <text class="meta-item">详细地址：{{service.address}}</text>
+    </view>
+  </view>
+
+  <view class="detail-card">
+    <view class="card-title">服务介绍</view>
+    <text class="detail-content">{{service.content}}</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-bar">
+    <button class="action-btn map-btn" bindtap="openMap">
+      <text>地图导航</text>
+    </button>
+    <button class="action-btn order-btn" bindtap="goMyAppointment">
+      <text>我的预约</text>
+    </button>
+    <button class="action-btn book-btn" bindtap="goAppointment">
+      <text>立即预约</text>
+    </button>
+  </view>
+</view>
