@@ -1,0 +1,20 @@
+<!-- pages/edit-profile/edit-profile.wxml -->
+<view class="container">
+  <view class="form-card">
+    <view class="avatar-row" bindtap="chooseAvatar">
+      <text class="row-label">头像</text>
+      <view class="avatar-preview-box" wx:if="{{!avatar}}">
+        <text class="avatar-emoji">👤</text>
+      </view>
+      <image wx:else class="avatar-preview" src="{{avatar}}" mode="aspectFill"/>
+      <text class="row-arrow">›</text>
+    </view>
+    
+    <view class="form-row">
+      <text class="row-label">昵称</text>
+      <input placeholder="请输入昵称" value="{{nickname}}" bindinput="onInput"/>
+    </view>
+  </view>
+
+  <button class="save-btn" bindtap="saveProfile">保存修改</button>
+</view>
