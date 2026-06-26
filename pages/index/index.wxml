@@ -1,0 +1,113 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 定位栏 -->
+  <view class="location-bar" bindtap="reGetLocation">
+    <text class="loc-icon">📍</text>
+    <view class="loc-info">
+      <text class="loc-city">{{location.city}}</text>
+      <text class="loc-address">{{location.address}}</text>
+    </view>
+    <text class="loc-arrow">›</text>
+  </view>
+
+  <!-- 附近按钮，单独一行 -->
+  <view class="nearby-bar">
+    <view class="nearby-btn" bindtap="goNearby">
+      <text class="nearby-icon">📍</text>
+      <text class="nearby-text">附近服务</text>
+    </view>
+  </view>
+
+  <!-- Banner轮播 -->
+  <swiper class="banner-swiper" indicator-dots autoplay circular interval="3000" wx:if="{{banners.length > 0}}">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image src="{{item.bannerUrl || item.coverUrl}}" mode="aspectFill" bindtap="onBannerTap" data-id="{{item.id}}"/>
+    </swiper-item>
+  </swiper>
+
+  <!-- 服务分类导航 -->
+  <view class="category-section">
+    <view class="section-title">服务分类</view>
+    <view class="category-grid">
+      <view class="category-item" wx:for="{{categories}}" wx:key="id" bindtap="onCategoryTap" data-id="{{item.id}}" data-name="{{item.name}}">
+        <view class="cate-icon-box">
+          <image class="cate-icon-img" src="{{item.icon}}" mode="aspectFit"/>
+        </view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索区域 -->
+  <view class="search-section">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input" 
+        placeholder="搜索服务名称..." 
+        value="{{searchKeyword}}" 
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="doSearch"
+      />
+      <view class="search-btn" bindtap="doSearch">搜索</view>
+    </view>
+    <view class="filter-bar">
+      <picker mode="selector" range="{{cateOptions}}" range-key="name" value="{{cateIndex}}" bindchange="onCateChange">
+        <view class="filter-item">
+          <text>{{cateOptions[cateIndex].name || '全部分类'}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+      </picker>
+      <picker mode="selector" range="{{sortOptions}}" range-key="label" value="{{sortIndex}}" bindchange="onSortChange">
+        <view class="filter-item">
+          <text>{{sortOptions[sortIndex].label || '默认排序'}}</text>
+          <text class="filter-arrow">▼</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result-section" wx:if="{{searchResults.length > 0 || isSearching}}">
+    <view class="section-title">
+      <text>搜索结果</text>
+      <text class="result-count" wx:if="{{searchTotal > 0}}">共 {{searchTotal}} 条</text>
+    </view>
+    <view class="search-list">
+      <view class="search-item" wx:for="{{searchResults}}" wx:key="id" bindtap="onHotServiceTap" data-id="{{item.id}}">
+        <image class="search-cover" src="{{item.coverUrl}}" mode="aspectFill"/>
+        <view class="search-info">
+          <text class="search-name">{{item.serviceName}}</text>
+          <text class="search-desc">{{item.content}}</text>
+          <view class="search-bottom">
+            <text class="search-price">¥{{item.price}}/{{item.unit}}</text>
+            <text class="search-area">{{item.city}} {{item.district}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="load-more" wx:if="{{searchHasMore}}" bindtap="loadMoreSearch"><text>点击加载更多</text></view>
+    <view class="load-more" wx:if="{{!searchHasMore && searchResults.length > 0}}"><text>没有更多了</text></view>
+    <view class="empty-tip" wx:if="{{searchResults.length === 0 && isSearching}}"><text>未找到相关服务</text></view>
+  </view>
+
+  <!-- 热门推荐 -->
+  <view class="hot-section">
+    <view class="section-title">
+      <text>热门推荐</text>
+      <text class="more" bindtap="quickBook">更多 ›</text>
+    </view>
+    <view class="hot-list">
+      <view class="hot-item" wx:for="{{hotServices}}" wx:key="id" bindtap="onHotServiceTap" data-id="{{item.id}}">
+        <image class="hot-cover" src="{{item.coverUrl}}" mode="aspectFill"/>
+        <view class="hot-info">
+          <text class="hot-name">{{item.serviceName}}</text>
+          <text class="hot-price">¥{{item.price}}/{{item.unit}}</text>
+          <text class="hot-area">{{item.city}} {{item.district}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty-tip" wx:if="{{hotServices.length === 0}}"><text>暂无热门服务</text></view>
+  </view>
+</view>
