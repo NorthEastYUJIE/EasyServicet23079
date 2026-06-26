@@ -1,0 +1,114 @@
+/* pages/service-detail/service-detail.wxss */
+.detail-banner, .detail-cover {
+  width: 100%;
+  height: 400rpx;
+}
+
+.detail-banner image, .detail-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.detail-card {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin: 20rpx 0;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.detail-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.detail-price {
+  display: flex;
+  align-items: baseline;
+}
+
+.price-num {
+  font-size: 40rpx;
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.detail-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-item {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  border-left: 8rpx solid #07c160;
+  padding-left: 16rpx;
+}
+
+.detail-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+}
+
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  display: flex;
+  padding: 20rpx 30rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 20rpx rgba(0,0,0,0.06);
+}
+
+.action-btn {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  margin: 0 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-btn {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.order-btn {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.book-btn {
+  background: #07c160;
+  color: white;
+  flex: 1.5;
+}
