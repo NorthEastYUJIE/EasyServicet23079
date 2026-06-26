@@ -1,0 +1,47 @@
+<!-- pages/appointment/appointment.wxml -->
+<view class="container">
+  <!-- 服务信息摘要 -->
+  <view class="service-summary" wx:if="{{service}}">
+    <image src="{{service.coverUrl}}" mode="aspectFill"/>
+    <view class="summary-info">
+      <text class="summary-name">{{service.serviceName}}</text>
+      <text class="summary-price">¥{{service.price}}/{{service.unit}}</text>
+    </view>
+  </view>
+
+  <!-- 预约表单 -->
+  <view class="form-card">
+    <view class="form-title">填写预约信息</view>
+    
+    <view class="form-row">
+      <text class="row-label">联系人</text>
+      <input placeholder="请输入姓名" value="{{username}}" bindinput="onInput" data-field="username"/>
+    </view>
+    
+    <view class="form-row">
+      <text class="row-label">联系电话</text>
+      <input type="number" placeholder="11位手机号" maxlength="11" value="{{phone}}" bindinput="onInput" data-field="phone"/>
+    </view>
+    
+    <view class="form-row">
+      <text class="row-label">预约日期</text>
+      <picker mode="selector" range="{{dateArray}}" bindchange="onDateChange">
+        <view class="picker-value">{{orderTime || '请选择日期'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-row">
+      <text class="row-label">预约时段</text>
+      <picker mode="selector" range="{{timeSlots}}" bindchange="onTimeChange">
+        <view class="picker-value">{{timeSlot || '请选择时段'}}</view>
+      </picker>
+    </view>
+    
+    <view class="form-row textarea-row">
+      <text class="row-label">备注（选填）</text>
+      <textarea placeholder="如有特殊要求请填写" value="{{remark}}" bindinput="onInput" data-field="remark" maxlength="200"/>
+    </view>
+  </view>
+
+  <button class="submit-btn" bindtap="submitAppointment">确认预约</button>
+</view>
